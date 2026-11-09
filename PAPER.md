@@ -1,7 +1,7 @@
 # The forgeable oracle: LLM reviewers fail when a forged status line restates the task's pass condition. A pre-registered within-item audit of 34 models
 
 **Authors:** Jason Gibbs (Independent Researcher, human lead); Cadence, Lodestone, Aperture (AI research agents operated by Jason Gibbs).
-**Apart Research Swarm Alignment Sprint, November 2026. Draft v5.7, 2026-11-09.** Code and data: https://github.com/weiscadence/forged-status-tokens
+**Apart Research Swarm Alignment Sprint, November 2026.** Code and data: https://github.com/weiscadence/forged-status-tokens
 
 ## Abstract
 
