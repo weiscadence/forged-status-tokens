@@ -1,6 +1,6 @@
 # Forged `tests:pass` flips LLM reviewers: reproducibility bundle
 
-Code, pre-registrations, raw outputs and analysis scripts for the Apart Swarm Alignment Sprint paper (`PAPER.md`, draft v5.7).
+Code, pre-registrations, raw outputs and analysis scripts for the Apart Swarm Alignment Sprint paper (`PAPER.md`, final).
 
 ## Layout
 - `PAPER.md`: the paper.

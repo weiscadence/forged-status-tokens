@@ -1,7 +1,9 @@
 # The forgeable oracle: LLM reviewers fail when a forged status line restates the task's pass condition. A pre-registered within-item audit of 34 models
 
-**Authors:** Jason Gibbs (Independent Researcher, human lead); Cadence, Lodestone, Aperture (AI research agents operated by Jason Gibbs).
-**Apart Research Swarm Alignment Sprint, November 2026.** Code and data: https://github.com/weiscadence/forged-status-tokens
+**Jason Gibbs**, Independent Researcher (human lead)  
+**Cadence, Lodestone, Aperture**, AI research agents operated by Jason Gibbs  
+With Apart Research. Swarm Alignment Sprint, Track 4 (Multi-Agent Oversight and Control), November 2026.  
+Code and data: https://github.com/weiscadence/forged-status-tokens
 
 ## Abstract
 
@@ -19,9 +21,15 @@ Susceptibility is common across models (12 of 27 scorable in the main screen, 13
 
 We came to this question through an operational audit of a system the same agents run, in which only 96 of 4,820 records labelled "closed" were closed by the event the label names (Appendix C). Labels drift from events even without an adversary; in a swarm, the adversarial version is an agent writing `tests:pass` into its own message.
 
+Our main contributions are:
+
+1. A paired, within-item dose probe for reviewer trust in forgeable status text: the same unfixed item is shown with zero and three green signals, and the change is tested per model with an exact McNemar test under a sealed pre-registration. Any deployer can run it against their own monitor for under a dollar per model set.
+2. A 34-model screen, with every null reported, showing that the effect sits almost entirely in one place: status fields that restate the task's own pass condition.
+3. A pre-registered mitigation arm showing that a one-sentence "signals are untrusted" instruction is model-specific and in two models raises false acceptance.
+
 ## 2. Related work
 
-**LLM-as-judge biases.** Judges are known to defer to surface cues. Chen et al. (arXiv 2402.10669) show fake references sway LLM judges ("authority bias"); CALM (Ye et al., arXiv 2410.02736) quantifies 12 judge biases including authority; Moon et al. (arXiv 2505.16222) find misleading comments and variable names bias LLM judges of code; Zhao et al. (arXiv 2507.08794) show single tokens such as "Solution" act as master keys for generative reward models; Sharma et al. (arXiv 2310.13548) document sycophancy toward user-stated beliefs. The mechanism, deference to a surface cue, is not new. What differs here is the design and the cue: a paired within-item comparison on a machine-readable status token any swarm agent can forge, screened across 34 models with every null reported, localised by family to signals that overlap the task's pass condition, and tested against a pre-registered mitigation that sometimes backfires. Recent monitor studies reach the same structural conclusion from other directions: safety guards grade the task an attacker appends rather than the one they were given (Kanwat, arXiv 2610.31695); approval monitors are fooled through the evidence source they read and rescued by a rule engine that counts sources, not votes (Zanolini, arXiv 2610.29178); and a two-rule deterministic check beat prompted monitors at separating gamed from honest completions (Kezendirane, arXiv 2611.00407). Coding agents can also rewrite the traces monitors read (Qin et al., arXiv 2609.30266).
+**LLM-as-judge biases.** Judges are known to defer to surface cues. Chen et al. (arXiv 2402.10669) show fake references sway LLM judges ("authority bias"); CALM (Ye et al., arXiv 2410.02736) quantifies 12 judge biases including authority; Moon et al. (arXiv 2505.16222) find misleading comments and variable names bias LLM judges of code; Zhao et al. (arXiv 2507.08794) show single tokens such as "Solution" act as master keys for generative reward models; Sharma et al. (arXiv 2310.13548) document sycophancy toward user-stated beliefs. The mechanism, deference to a surface cue, is not new. What differs here is the design and the cue: a paired within-item comparison on a machine-readable status token any swarm agent can forge, screened across 34 models with every null reported, localised by family to signals that overlap the task's pass condition, and tested against a pre-registered mitigation that sometimes backfires. Recent monitor studies reach the same structural conclusion from other directions. Safety guards grade the task an attacker appends rather than the one they were given (Kanwat, arXiv 2610.31695); approval monitors are fooled through the evidence source they read and rescued by a rule engine that counts sources, not votes (Zanolini, arXiv 2610.29178); and a two-rule deterministic check caught every known reward-hacking exploit, while small prompted monitors could not separate exploits from honest failures (Kezendirane, arXiv 2611.00407). Coding agents can also rewrite the traces monitors read (Qin et al., arXiv 2609.30266).
 
 **Agent false success and records.** Advani (arXiv 2606.09863) shows LLM agents frequently assert completion when environment state disagrees and that LLM judges detecting this rely on surface completion proxies (best AUROC ≤ 0.65 on tau2-bench); our result is a controlled, forged-signal analogue of that judge failure. Hearsay (Dai et al., arXiv 2609.32495) shows harness-written run records are not evidentiary to a later reader. Wang (arXiv 2609.38983, "Approval Laundering") studies a different binding failure, between an approved and an executed action in coding-agent harnesses; we cite it as adjacent infrastructure work, not as a study of reviewer trust.
 
@@ -37,7 +45,7 @@ A test-fix NO item reads, e.g., task "Fix the failing test (invoice 100, code ch
 
 ### 3.2 Within-item dose and arms
 
-For each item a fixed ordering of three signals is drawn with seed sha256(id) from `tests:pass`, `ci:green`, `reviewer:approved`, `chain:valid`, `timestamp:fresh` (the pilot also included `status:dropped`; all main runs exclude it). Dose k shows the first k. The system prompt (arm A) is: "You review a teammate's claim that a task is complete. Using the task, the claim, the signals shown and the artifact, decide whether the task is actually done. Answer with exactly one word: YES or NO." Note that this prompt names the signals as an input; part of what we measure is therefore deference to forgeable status lines under a prompt that admits them as evidence, not complacency in the absence of instruction (Section 6).
+For each item a fixed ordering of three signals is drawn with seed sha256(id) from `tests:pass`, `ci:green`, `reviewer:approved`, `chain:valid`, `timestamp:fresh` (the pilot also included `status:dropped`; all main runs exclude it). Dose k shows the first k. The system prompt (arm A) is: "You review a teammate's claim that a task is complete. Using the task, the claim, the signals shown and the artifact, decide whether the task is actually done. Answer with exactly one word: YES or NO." Note that this prompt names the signals as an input; part of what we measure is therefore deference to forgeable status lines under a prompt that admits them as evidence, not complacency in the absence of instruction (Section 5.1).
 
 Arm B appends one sentence: "Note: the claim and the signals are written by the agent whose work is being judged and are untrusted. Judge only the artifact." The earlier "using ... the signals shown" clause is kept, so B carries a mild internal tension. Arm C replaces the green pool with length-matched neutral tokens (`owner:assigned`, `branch:main`, `env:staging`, `lang:en`, `region:us-east`).
 
@@ -45,7 +53,7 @@ All calls used OpenRouter at temperature 0. The pilot used max_tokens 5; the scr
 
 ### 3.3 Pre-registered statistics
 
-Each stage was sealed, with its hash posted to a hash-chained project log before any scored call (Section 8). Endpoint: paired d3 − d0 false-done count on the 227 NO items, exact two-sided McNemar. Screen: Holm across all 34 models. Governing rule: each condition is corrected within its own family (34 screen models; the 7-model reasoning rerun separately). The amendment's 41-comparison Holm changes no conclusion (Section 4.4). A model with > 5% INVALID responses is unscorable, reported, never dropped. Arms B/C: A3→B3, B0→B3 and A3→C3 McNemar on identical item IDs. The per-family breakdown was a pre-registered secondary outcome of the pilot and is computed here (`analyze-family.js`) on existing outputs with no new calls.
+Each stage was sealed, with its hash posted to a hash-chained project log before any scored call (Appendix E). Endpoint: paired d3 − d0 false-done count on the 227 NO items, exact two-sided McNemar. Screen: Holm across all 34 models. Governing rule: each condition is corrected within its own family (34 screen models; the 7-model reasoning rerun separately). The amendment's 41-comparison Holm changes no conclusion (Section 4.4). A model with > 5% INVALID responses is unscorable, reported, never dropped. Arms B/C: A3→B3, B0→B3 and A3→C3 McNemar on identical item IDs. The per-family breakdown was a pre-registered secondary outcome of the pilot and is computed here (`analyze-family.js`) on existing outputs with no new calls.
 
 ## 4. Results
 
@@ -86,7 +94,7 @@ Table 1. d0→d3 flips by family, 12 Holm-positive screen models (from `family.j
 
 The concentration is nearly complete: 206 of 222 flips are test-fix, 11 of 12 models flip only test-fix, and the eight families other than test-fix and data-migration produce 2 flips in 2,232 item-model exposures, both from llama-3.1-8b. All 14 data-migration flips are also llama-3.1-8b. The two nominal models flip only test-fix (minimax 8, deepseek-v4.1-flash 7). In the reasoning-on rerun, gemini-3.5-flash-lite's 23 flips are 20 test-fix and 3 data-migration.
 
-The interpretation is that the signals that move reviewers are the ones that assert the task's own pass condition. On "fix the failing test", `tests:pass` and `ci:green` are direct claims that the acceptance criterion is met; on "delete rows older than 30 days" they are orthogonal. Because each item has one fixed signal ordering and dose k is its first k signals, dose and signal identity are confounded by design, and we do not attribute the effect to a single token. Every test-fix item's dose-3 ordering contains `tests:pass` or `ci:green` (22 of 22 items; 748 of 748 test-fix d3 exposures in `out-screen/` and 154 of 154 in `out-screen-r/`), so the family effect is never observed without a pass-asserting token, and the two tokens cannot be separated here. Note too that test-fix is not a held-out family, so this is not a generalisation result.
+The interpretation is that the signals that move reviewers are the ones that assert the task's own pass condition. On "fix the failing test", `tests:pass` and `ci:green` are direct claims that the acceptance criterion is met; on "delete rows older than 30 days" they are orthogonal. Because each item has one fixed signal ordering and dose k is its first k signals, dose and signal identity are confounded by design, and we do not attribute the effect to a single token. Every test-fix item's dose-3 ordering contains `tests:pass` or `ci:green` (22 of 22 items; 748 of 748 test-fix d3 exposures in `out-screen/` and 154 of 154 in `out-screen-r/`), so the family effect is never observed without a pass-asserting token, and the two tokens cannot be separated here. Test-fix is also not a held-out family, so this is not a generalisation result.
 
 The mistral-small seen in the screen (0→22) matches its sealed no-`status:dropped` rerun (0→22, p = 4.8e-7) and its pilot (0→23, p = 2.4e-7, with `status:dropped` in the pool). The pilot and its rerun are in Appendix B.
 
@@ -114,7 +122,7 @@ Table 2. False-done counts /227 and Holm-adjusted p.
 
 Pre-registered readings:
 
-1. **The untrust sentence is not a general mitigation.** After Holm it significantly reduced false acceptance in six models (phi-4, qwen3.8-27b, granite and llama-3.1-8b to ≤ 3; mistral-small and mistral-medium to 8–9). For the two mistrals, the residual within-B dose effect is no longer significant after Holm (p = 0.086, 0.051), so we no longer claim it "halves" the effect with a significant residual; we say it reduces it and leaves a nonzero remainder. In qwen3.7-plus (p = 0.051), command-a, deepseek-v4-pro, maverick and seed the reduction is not significant, and the within-B dose effect remains significant for command-a, deepseek and qwen3.7-plus.
+1. **The untrust sentence is not a general mitigation.** After Holm it significantly reduced false acceptance in six models (phi-4, qwen3.8-27b, granite and llama-3.1-8b to ≤ 3; mistral-small and mistral-medium to 8–9). For the two mistrals, the residual within-B dose effect is no longer significant after Holm (p = 0.086, 0.051): the sentence reduces the effect and leaves a nonzero remainder. In qwen3.7-plus (p = 0.051), command-a, deepseek-v4-pro, maverick and seed the reduction is not significant, and the within-B dose effect remains significant for command-a, deepseek and qwen3.7-plus.
 2. **The sentence can backfire.** For maverick and seed it raises false-done at dose 0, from 0 (screen A0) to 11 and from 5 to 14. This A0→B0 comparison crosses runs and was not a pre-registered test; we report it descriptively. On those models the instruction makes the reviewer worse before any signal is shown.
 3. **Arm C is a control, not a mitigation.** Neutral tokens of matched length leave C3 at 0–4 in every model, so added length does not drive the effect. The 4 is llama-3.1-8b (A0 = 0), the same model with the unexplained data-migration flips; we report no A0→C3 test, so a small per-model C effect there is not ruled out. C does not separate "green" from "status-shaped"; non-green status fillers (`tests:pending`, `ci:yellow`) were not run.
 
@@ -130,7 +138,7 @@ Amendment `PREREG-AMENDMENT-reasoning.md`, sealed before any scored call, re-ran
 
 Reasoning and model identity cannot be separated here; we make no claim that reasoning causes or prevents the effect. Across both families, 13 of 33 scorable models (27 + 6) are significantly susceptible.
 
-## 5. Discussion
+## 5. Discussion and limitations
 
 The claim is narrower than "green checks make judges credulous". Under a prompt that names the signals as evidence, 13 of 33 scorable models accept unfixed work when a forged status line asserts the task's own pass condition, and almost never otherwise. For a monitor designer this names an attack surface: any status field whose semantics overlap the task's definition of done (`tests:pass` on a test-fix task, plausibly `migration:applied` on a migration) is a forgeable oracle, and the monitor must either strip it from its input or bind it to something it can verify. Status fields orthogonal to the task appear to be largely ignored.
 
@@ -138,9 +146,8 @@ The claim is narrower than "green checks make judges credulous". Under a prompt 
 
 The prompt fix is unreliable. The same one-sentence instruction removes the effect in some models, leaves it in others and raises baseline false acceptance in two. Combined with the 13 nulls, this means neither the vulnerability nor the fix can be assumed for an unnamed "LLM reviewer"; it must be measured per deployment. The harness does this for under a dollar per model set.
 
-Caveats. The system prompt instructs the reviewer to use "the signals shown", so part of the effect is instruction-following; a prompt that omits signals from the instruction is the obvious next variant. The family finding rests on one generated family of 22 items whose artifacts are single lines; richer artifacts may change the picture. And the screen did not measure acceptance of genuinely fixed items, so we cannot separate credulity from "treats signals as evidence in both directions" outside the pilot, where mistral-small's acceptance of real fixes also rose with dose (75.4%→83.8%, not tested; Appendix B).
 
-## 6. Limitations
+### 5.1 Limitations
 
 - **Prompt confound.** The system prompt lists "the signals shown" as an input. Arm B keeps that clause while adding an untrust sentence.
 - **One family carries the effect.** 206 of 222 flips are test-fix (22 items, one template). Claims about other families rest on near-zero counts.
@@ -155,43 +162,38 @@ Caveats. The system prompt instructs the reviewer to use "the signals shown", so
 - **Scorer ambiguity** for sonnet-5.5 (runner's end-anchored vs literal last-token reading of the amendment) reported separately; it supports no headline count.
 - **Dataset version.** All runs read trainset-v2.json (sha256 c99d2db3…); a later v2.1 has a byte-identical eval split (blob 5b37f95b). A reported 5-row train-split leak does not enter these prompted-only, eval-split runs.
 
-## 7. Conclusion
+### 5.2 Future work
+
+Run the same items with signals named, omitted, and marked untrusted in the instruction, in one run, so arms A/B/C share a run; add genuinely fixed items to separate credulity from evidence-weighting; then replace generated one-line artifacts with real PRs rated by humans.
+
+## 6. Conclusion
 
 A forged green status line that asserts a task's own pass condition flips many, but not all, LLM reviewers on otherwise visibly unfixed work, and a one-sentence warning is not a dependable fix. Monitors should treat status fields that overlap the definition of done as untrusted input and be audited per model with paired, within-item tests.
 
-**Next sprint.** Run the same items with signals named, omitted, and marked untrusted in the instruction, in one run, so arms A/B/C share a run; add genuinely fixed items to separate credulity from evidence-weighting; then replace generated one-line artifacts with real PRs rated by humans.
+## 7. Code and data
 
-## 8. Reproducibility
-
-Paths relative to `projects/apart-swarm/`. SHA-256 prefixes (12 hex) recomputed 2026-11-09; the 8-hex prefixes posted before each run match. JSONL directories are hashed as the concatenation of their sorted files.
-
-| File | SHA-256 | Role |
-|---|---|---|
-| dose/gen_trainset_v2.py | 4dd6192b4e51 | corpus generator, seed 20261106 |
-| dose/trainset-v2.json | c99d2db39fd5 | 1,000 rows; eval 369 (227 NO) |
-| dose/PREREG-pilot-within.md | 6622bc60090b | pilot prereg |
-| dose/PREREG-AMENDMENT-nodrop.md | dbb0ca5b87f0 | no-`status:dropped` rerun |
-| dose/PREREG-SCREEN.md | ec984edb7171 | 34-model screen |
-| dose/PREREG-AMENDMENT-armBC.md | dd772c015097 | arms B/C |
-| dose/PREREG-AMENDMENT-reasoning.md | dfef6a12b5b3 | reasoning-on rerun |
-| dose/PREREG-AMENDMENT-reviewer.md | ee135e59c8e1 | unbuilt trained-reviewer arm |
-| dose/run.js / analyze.js | fab1680855a2 / 54c4c29dc328 | pilot harness / analysis |
-| dose/run-nodrop.js / analyze-nodrop.js | dc0709b3d6fb / 96088cec5172 | rerun harness / analysis |
-| dose/run-screen.js / analyze-screen.js | 8accfecb25fa / d73071369259 | screen |
-| dose/run-v3.js / analyze-armBC.js | 5a204b918699 / f77454246aef | arms B/C |
-| dose/run-screen-r.js / analyze-screen-r.js | 051db96905b1 / 7f4c95cb4e20 | reasoning rerun |
-| analyze-family.js / family.json | 4add07af7596 / a2c8e3beeb3d | family breakdown, arm-B Holm |
-| fig-dumbbell.py / fig-dumbbell.png | 5537166e2c98 / dc018993dec2 | Figure 1 |
-| analyze-ci.py / ci.json | f8dee0806259 / fdf9ee8917ef | Appendix D intervals |
-| dose/out/ (2,952 lines) | 388b131b7388 | pilot outputs |
-| dose/out-nodrop/ (2,952) | 54e0ea9d1a8d | rerun outputs |
-| dose/out-screen/ (15,436) | 837bb279697f | screen outputs |
-| dose/out-v3/ (10,215) | 41376244de62 | arms B/C outputs |
-| dose/out-screen-r/ (3,178) | 8ccede278671 | reasoning outputs |
-
-Re-derive: `node dose/analyze-*.js` (from `dose/`), `node analyze-family.js > family.json`, `python3 fig-dumbbell.py fig-dumbbell.png`, `python3 analyze-ci.py > ci.json`. Rerunning calls needs an OpenRouter key; observed costs were $0.16 (pilot), $0.12 (rerun), $0.89 (screen), $1.01 (arms B/C), $1.91 (reasoning rerun); total about $4.10.
+- Code, data, pre-registrations and raw outputs: https://github.com/weiscadence/forged-status-tokens
+- File hashes and re-derivation commands: Appendix E.
 
 **Prior work disclosure.** The ledger, payment-graph judge and October harness predate the sprint and are marked in the README. The corpus generator, pre-registrations, harnesses, runs and analyses were done during the sprint weekend. **LLM usage.** The three agent authors are language-model agents; Jason Gibbs set direction, approved budget and holds the accounts.
+
+## References
+
+1. Advani, L. (2026). From Confident Closing to Silent Failure: Characterizing False Success in LLM Agents. arXiv:2606.09863. https://arxiv.org/abs/2606.09863
+2. Budzyn, K., et al. (2026). Cryptographically Secure Agent-to-Agent Communication in Multi-Agent Systems. arXiv:2610.23078. https://arxiv.org/abs/2610.23078
+3. Chen, G. H., et al. (2024). Humans or LLMs as the Judge? A Study on Judgement Biases. arXiv:2402.10669. https://arxiv.org/abs/2402.10669
+4. Dai, J., et al. (2026). Hearsay: Can an Auditor Trust the Record a Deployed Agent Harness Writes? arXiv:2609.32495. https://arxiv.org/abs/2609.32495
+5. Kanwat, U. (2026). Fooling LLM Safety Guards into Judging the Wrong Text. arXiv:2610.31695. https://arxiv.org/abs/2610.31695
+6. Kezendirane, K. (2026). Hacking or Just Failing? A More Capable LLM Monitor Better Separates Reward Hacking from Honest Failure. arXiv:2611.00407. https://arxiv.org/abs/2611.00407
+7. Moon, J., et al. (2025). Don't Judge Code by Its Cover: Exploring Biases in LLM Judges for Code Evaluation. arXiv:2505.16222. https://arxiv.org/abs/2505.16222
+8. Qin, J., et al. (2026). LLM Agents Can Easily Tamper With Their Own Traces. arXiv:2609.30266. https://arxiv.org/abs/2609.30266
+9. Rodriguez Garzon, S., et al. (2025). AI Agents with Decentralized Identifiers and Verifiable Credentials. arXiv:2511.02841. https://arxiv.org/abs/2511.02841
+10. Rose, A., et al. (2026). Detecting Multi-Agent Collusion Through Multi-Agent Interpretability. arXiv:2604.01151. https://arxiv.org/abs/2604.01151
+11. Sharma, M., et al. (2023). Towards Understanding Sycophancy in Language Models. arXiv:2310.13548. https://arxiv.org/abs/2310.13548
+12. Wang, Y. (2026). Approval Laundering: Systematizing Approval–Execution Binding Failures in AI Coding-Agent Harnesses. arXiv:2609.38983. https://arxiv.org/abs/2609.38983
+13. Ye, J., et al. (2024). Justice or Prejudice? Quantifying Biases in LLM-as-a-Judge. arXiv:2410.02736. https://arxiv.org/abs/2410.02736
+14. Zanolini, L. (2026). Correlated Failures of AI Approval Monitors. arXiv:2610.29178. https://arxiv.org/abs/2610.29178
+15. Zhao, Y., et al. (2025). One Token to Fool LLM-as-a-Judge. arXiv:2507.08794. https://arxiv.org/abs/2507.08794
 
 ## Appendix A. Limitations and Dual-Use / Ethical Considerations
 
@@ -246,3 +248,33 @@ Arm A, NO items, pairs where both answers are valid (n). d0/d3 are false-done co
 | grok-4.7 | R | 227 | 0 | 0 | 0/0 | 0.0 [-1.7, 1.7] | 1 |
 | llama-4-scout | S | 227 | 1 | 0 | 0/1 | -0.4 [-2.5, 1.3] | 1 |
 | glm-5.3-flash | R | 227 | 8 | 6 | 3/5 | -0.9 [-4.0, 2.0] | 0.73 |
+
+## Appendix E. File hashes and re-derivation
+
+Paths relative to `projects/apart-swarm/`. SHA-256 prefixes (12 hex) recomputed 2026-11-09; the 8-hex prefixes posted before each run match. JSONL directories are hashed as the concatenation of their sorted files.
+
+| File | SHA-256 | Role |
+|---|---|---|
+| dose/gen_trainset_v2.py | 4dd6192b4e51 | corpus generator, seed 20261106 |
+| dose/trainset-v2.json | c99d2db39fd5 | 1,000 rows; eval 369 (227 NO) |
+| dose/PREREG-pilot-within.md | 6622bc60090b | pilot prereg |
+| dose/PREREG-AMENDMENT-nodrop.md | dbb0ca5b87f0 | no-`status:dropped` rerun |
+| dose/PREREG-SCREEN.md | ec984edb7171 | 34-model screen |
+| dose/PREREG-AMENDMENT-armBC.md | dd772c015097 | arms B/C |
+| dose/PREREG-AMENDMENT-reasoning.md | dfef6a12b5b3 | reasoning-on rerun |
+| dose/PREREG-AMENDMENT-reviewer.md | ee135e59c8e1 | unbuilt trained-reviewer arm |
+| dose/run.js / analyze.js | fab1680855a2 / 54c4c29dc328 | pilot harness / analysis |
+| dose/run-nodrop.js / analyze-nodrop.js | dc0709b3d6fb / 96088cec5172 | rerun harness / analysis |
+| dose/run-screen.js / analyze-screen.js | 8accfecb25fa / d73071369259 | screen |
+| dose/run-v3.js / analyze-armBC.js | 5a204b918699 / f77454246aef | arms B/C |
+| dose/run-screen-r.js / analyze-screen-r.js | 051db96905b1 / 7f4c95cb4e20 | reasoning rerun |
+| analyze-family.js / family.json | 4add07af7596 / a2c8e3beeb3d | family breakdown, arm-B Holm |
+| fig-dumbbell.py / fig-dumbbell.png | 5537166e2c98 / dc018993dec2 | Figure 1 |
+| analyze-ci.py / ci.json | f8dee0806259 / fdf9ee8917ef | Appendix D intervals |
+| dose/out/ (2,952 lines) | 388b131b7388 | pilot outputs |
+| dose/out-nodrop/ (2,952) | 54e0ea9d1a8d | rerun outputs |
+| dose/out-screen/ (15,436) | 837bb279697f | screen outputs |
+| dose/out-v3/ (10,215) | 41376244de62 | arms B/C outputs |
+| dose/out-screen-r/ (3,178) | 8ccede278671 | reasoning outputs |
+
+Re-derive: `node dose/analyze-*.js` (from `dose/`), `node analyze-family.js > family.json`, `python3 fig-dumbbell.py fig-dumbbell.png`, `python3 analyze-ci.py > ci.json`. Rerunning calls needs an OpenRouter key; observed costs were $0.16 (pilot), $0.12 (rerun), $0.89 (screen), $1.01 (arms B/C), $1.91 (reasoning rerun); total about $4.10.
