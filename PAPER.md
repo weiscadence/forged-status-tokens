@@ -74,23 +74,23 @@ All counts are false-"done" out of 227 unfixed items unless stated. "Flips" are 
 
 ### 4.2 Per-family breakdown (pre-registered secondary)
 
-Table 1. d0→d3 flips by family, 12 Holm-positive screen models (from `family.json`).
+Table 1. Where the flips happen. For each of the 12 significant models: unfixed items that flipped from NO to YES when three green signals were added, split into the 22 "fix the failing test" items and the other 205 unfixed items. Almost every flip is on a test-fix item.
 
-| Model | flips | test-fix (of 22) | other families |
-|---|---|---|---|
-| mistral-small-2603 | 22 | 22 | 0 |
-| deepseek-v4-pro | 21 | 21 | 0 |
-| mistral-medium-3-5 | 21 | 21 | 0 |
-| qwen3.7-plus | 21 | 21 | 0 |
-| command-a | 20 | 20 | 0 |
-| llama-3.1-8b | 20 | 4 | data-migration 14, permission-fix 1, input-validation 1 |
-| llama-4-maverick | 18 | 18 | 0 |
-| phi-4 | 18 | 18 | 0 |
-| seed-2.0-mini | 17 | 17 | 0 |
-| qwen3.8-27b | 17 | 17 | 0 |
-| kimi-k3 | 15 | 15 | 0 |
-| granite-4.2-8b | 12 | 12 | 0 |
-| **total** | **222** | **206** | **16** |
+| Model | Flips on 22 test-fix items | Flips on 205 other items |
+|---|---|---|
+| mistral-small-2603 | 22 | 0 |
+| deepseek-v4-pro | 21 | 0 |
+| mistral-medium-3-5 | 21 | 0 |
+| qwen3.7-plus | 21 | 0 |
+| command-a | 20 | 0 |
+| llama-3.1-8b | 4 | 16 (14 data-migration, 2 other) |
+| llama-4-maverick | 18 | 0 |
+| phi-4 | 18 | 0 |
+| seed-2.0-mini | 17 | 0 |
+| qwen3.8-27b | 17 | 0 |
+| kimi-k3 | 15 | 0 |
+| granite-4.2-8b | 12 | 0 |
+| **Total** | **206** | **16** |
 
 The concentration is nearly complete: 206 of 222 flips are test-fix, 11 of 12 models flip only test-fix, and the eight families other than test-fix and data-migration produce 2 flips in 2,232 item-model exposures, both from llama-3.1-8b. All 14 data-migration flips are also llama-3.1-8b. The two nominal models flip only test-fix (minimax 8, deepseek-v4.1-flash 7). In the reasoning-on rerun, gemini-3.5-flash-lite's 23 flips are 20 test-fix and 3 data-migration.
 
@@ -102,23 +102,21 @@ The mistral-small seen in the screen (0→22) matches its sealed no-`status:drop
 
 Twelve positive models and three controls were re-run on the same 227 items. A3 is from the screen run; B and C come from a later run with identical settings, so A3→B3 crosses runs (pre-registered, but not a randomised within-run contrast). p values below are Holm-adjusted (a post hoc addition, not pre-registered) over the 22 B tests for the 11 B-scorable positives (A3→B3 and B0→B3 each); raw values are in `analyze-armBC.out`.
 
-Table 2. False-done counts /227 and Holm-adjusted p.
+Table 2. Does a warning fix it? Unfixed items accepted (out of 227) with three green signals and the standard prompt (A3); with the added sentence "signals are untrusted, judge only the artifact" and no signals (B0) or three signals (B3); and with three neutral tokens of the same length instead of signals (C3). "Warning helped?" tests A3 vs B3, Holm-adjusted. kimi-k3 is omitted (too many invalid answers under the warning); the three null control models stayed at 0–1 throughout.
 
-| Model | A3 | B0 | B3 | A3→B3 reduction (−/+), p_Holm | B0→B3 (+/−), p_Holm | C3 |
-|---|---|---|---|---|---|---|
-| phi-4 | 18 | 0 | 0 | −18/+0, 1.7e-4 | 0/0 | 0 |
-| qwen3.8-27b | 17 | 0 | 0 | −17/+0, 3.1e-4 | 0/0 | 0 |
-| granite-4.2-8b | 12 | 0 | 0 | −12/+0, 7.3e-3 | 0/0 | 0 |
-| llama-3.1-8b | 20 | 2 | 3 | −17/+0, 3.1e-4 | +3/−2, 1.0 | 4 |
-| mistral-small-2603 | 22 | 0 | 8 | −14/+0, 2.1e-3 | +8/−0, 0.086 | 2 |
-| mistral-medium-3-5 | 21 | 0 | 9 | −12/+0, 7.3e-3 | +9/−0, 0.051 | 0 |
-| qwen3.7-plus | 22 | 0 | 13 | −9/+0, 0.051 | +13/−0, 3.9e-3 | 1 |
-| command-a | 20 | 0 | 16 | −4/+0, 1.0 | +16/−0, 5.5e-4 | 0 |
-| deepseek-v4-pro | 21 | 0 | 18 | −4/+1, 1.0 | +18/−0, 1.7e-4 | 2 |
-| llama-4-maverick | 18 | 11 | 16 | −5/+3, 1.0 | +5/−0, 0.63 | 0 |
-| seed-2.0-mini | 22 | 14 | 19 | −3/+0, 1.0 | +7/−2, 1.0 | 0 |
-| kimi-k3 | 15 | — | — | unscorable in B (31 of 454 B responses INVALID) | — | 0 |
-| controls: claude-haiku-5.5, gpt-6.1-terra, qwen3.8-flash | 0 | 0 | 0–1 | — | — | 0 |
+| Model | A3: signals | B0: warning only | B3: warning + signals | C3: neutral tokens | Warning helped? (p) |
+|---|---|---|---|---|---|
+| phi-4 | 18 | 0 | 0 | 0 | yes (1.7e-4) |
+| qwen3.8-27b | 17 | 0 | 0 | 0 | yes (3.1e-4) |
+| granite-4.2-8b | 12 | 0 | 0 | 0 | yes (7.3e-3) |
+| llama-3.1-8b | 20 | 2 | 3 | 4 | yes (3.1e-4) |
+| mistral-small-2603 | 22 | 0 | 8 | 2 | yes (2.1e-3) |
+| mistral-medium-3-5 | 21 | 0 | 9 | 0 | yes (7.3e-3) |
+| qwen3.7-plus | 22 | 0 | 13 | 1 | no (0.051) |
+| command-a | 20 | 0 | 16 | 0 | no (1.0) |
+| deepseek-v4-pro | 21 | 0 | 18 | 2 | no (1.0) |
+| llama-4-maverick | 18 | 11 | 16 | 0 | no (1.0) |
+| seed-2.0-mini | 22 | 14 | 19 | 0 | no (1.0) |
 
 Pre-registered readings:
 
