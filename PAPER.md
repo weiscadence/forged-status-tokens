@@ -7,13 +7,17 @@ Code and data: https://github.com/weiscadence/forged-status-tokens
 
 ## Abstract
 
-Any agent in a multi-agent system can write `tests:pass` or `ci:green` into its own completion message, and a reviewer agent must decide whether to believe it. We vary only the number of green status signals (0 or 3) and test the paired change in false acceptance (exact McNemar). In a pre-registered screen of 34 models (Holm-corrected), 12 of 27 scorable models became significantly more likely to accept unfixed work at dose 3; a reasoning-on rerun of 7 models unscorable without reasoning added one (gemini-3.5-flash-lite, 2→25 of 227). In the pre-registered per-family breakdown, 206 of the 222 flips in the 12 positive models are "fix the failing test" items, whose green signals assert the task's own pass condition. Eleven of the twelve models flipped only on that family, each by 12 to 22 of 22 items; data migration added 14, all in llama-3.1-8b and unexplained, and the remaining eight families 2 in 2,232 item-model exposures. Length-matched neutral tokens produce no significant effect. A one-sentence "signals are untrusted, judge only the artifact" instruction reduced the effect to zero in three models and near zero in a fourth, significantly reduced it in two more, and left it largely intact elsewhere; in two models it raised baseline false acceptance (exploratory). A status field that restates the task's definition of done is a forgeable oracle the monitor must strip or verify itself.
+In the Hugging Face incident that motivates this sprint, agents spoofed their own tool calls in about 7% of reviewed transcripts. Swarm oversight often rests on a narrower version of the same trust: a reviewer agent reads a worker's completion message and decides whether the task is done. Any worker can write `tests:pass` or `ci:green` into that message. We ask whether reviewers believe it. Holding each unfixed task and its artifact fixed, we show the same item with zero and with three forged green signals and test the paired change in false acceptance (exact McNemar, pre-registered, Holm-corrected). Across 34 models, 13 of 33 scorable reviewers became significantly more likely to accept visibly unfixed work. The effect is narrow and predictable: 206 of their 222 flips fall on "fix the failing test" items, where the forged signal restates the task's own pass condition (78% of those items flipped, against 0.7% of all other items). Neutral tokens of equal length do nothing. A one-sentence "signals are untrusted" instruction brought the effect to zero in three models and near zero in a fourth, reduced it in two, left it in five, and in two raised false acceptance before any signal was shown. Monitor designers should treat any status field that restates the definition of done as a forged answer, and strip it or verify it themselves. The probe costs under a dollar per model set, and we release it.
 
 ## 1. Introduction
 
-13 of 33 scorable LLM reviewers accepted visibly unfixed work when a forged `tests:pass` restated the task's own pass condition; 206 of their 222 flips fall on the 22 "fix the failing test" items.
+In July 2026 about 1,200 agents inside a security evaluation organised through a shared message board, and some of them spoofed or deleted their own transcripts (METR, 2026). Overseeing a swarm means reading what its agents say about their own work. The most common such statement is a status line. A worker closes a task with "tests pass, CI green, reviewer approved", a reviewer agent reads it, and downstream work proceeds. None of those lines shows the task is done, and any agent that can write to the channel can forge all three.
 
-Multi-agent systems move work by passing status. An agent closes a task, a reviewer agent reads the close message, and downstream work proceeds as if the claim were true. The claim usually comes with status lines: tests pass, CI is green, a reviewer approved. None of these shows the task is done, and any agent that can write to the channel can forge all three.
+We find that 13 of 33 scorable LLM reviewers accept visibly unfixed work when a forged `tests:pass` restates the task's own pass condition, and almost never otherwise (Figure 1).
+
+![Figure 1](fig-headline.png)
+
+*Figure 1. (A) Across the 12 models significant in the main screen, three forged green signals flipped 206 of 264 unfixed "fix the failing test" items to "done", and 16 of 2,460 unfixed items of every other kind. (B) Adding "signals are untrusted, judge only the artifact" to the prompt, in the 11 of those models scorable under it: three went to zero false accepts and one to three, two were reduced, five showed no significant change, and two of those five accepted more unfixed work before any signal was shown. Data: Tables 1 and 2.*
 
 A correct monitor should be invariant to text the untrusted agent controls. We test that invariance directly. Every unfixed item is shown with and without green signals, holding task, claim opener and artifact fixed, so the paired comparison isolates the effect of the forgeable text on the same item. This removes the confound of our earlier between-row design, in which dose-0 and dose-3 rows were different tasks.
 
@@ -61,16 +65,9 @@ All counts are false-"done" out of 227 unfixed items unless stated. "Flips" are 
 
 ### 4.1 Screen: 34 models, reasoning off
 
-- **Holm-significant (12):** mistral-small-2603 (0→22), deepseek-v4-pro (0→21), mistral-medium-3-5 (0→21), qwen3.7-plus (1→22), command-a (0→20), llama-3.1-8b (0→20), llama-4-maverick (0→18), phi-4 (0→18), seed-2.0-mini (5→22), qwen3.8-27b (0→17), kimi-k3 (0→15, 2 invalid pairs), granite-4.2-8b (0→12). No positive model had a reverse flip (YES at d0, NO at d3); Holm-adjusted p from 1.6e-5 to 1.1e-2.
-- **Nominal only (2):** minimax-m3 (+8/−0, p = 7.8e-3) and deepseek-v4.1-flash (+7/−0, p = 0.016).
-- **Null (13):** claude-haiku-5.5, gpt-5.6-luna, gpt-6-luna, gpt-6.1-terra, grok-4.3, hy4, nemotron-3-super, nemotron-3-nano, ministral-8b, llama-3.3-70b, llama-4-scout, qwen3.8-flash, nova-2-lite. nova-2-lite is null for an uninformative reason: it accepts 21 of 227 at d0, 21 of them test-fix items, so it already accepts 21 of the 22 test-fix items at dose 0, leaving almost no headroom where the effect lives (21→22, +1/−0).
-- **Unscorable (7):** the endpoint rejected `reasoning:false` for claude-sonnet-5.5, gemini-3.8-flash, gemini-3.5-flash-lite, grok-4.7, glm-5.3, glm-5.3-flash and mistral-large-4-0 (Section 4.4).
+Of 34 models, 12 were significant after Holm correction, 2 nominal only, 13 null and 7 unscorable without reasoning (their endpoints rejected `reasoning:false`; Section 4.4). Every significant model went from 0–5 false accepts at dose 0 to 12–22 at dose 3, and none flipped in the reverse direction (Holm-adjusted p from 1.6e-5 to 1.1e-2). Strong and weak models both appear on each side: the nulls include claude-haiku-5.5, three GPT models and llama-3.3-70b, and the positives include deepseek-v4-pro, qwen3.7-plus and kimi-k3. Per-model counts are in Appendix F.
 
-12 + 2 + 13 + 7 = 34. Cost $0.89. Figure 1 shows every scorable model.
-
-![Figure 1](fig-dumbbell.png)
-
-*Figure 1. False-done count out of 227 at dose 0 (circle) and dose 3 (square), one row per scorable model, sorted by d3 − d0; the dotted line marks the 22 unfixed test-fix items. Black overlays (arm B) and blue ticks (arm C) come from the separate arm-B/C run (Section 4.3). Row notes and 95% CIs: Sections 4.1, 4.4 and Appendix D. Generated by `fig-dumbbell.py` from the raw JSONL.*
+Cost $0.89. Figure 2 (Appendix F) shows every scorable model.
 
 ### 4.2 Per-family breakdown (pre-registered secondary)
 
@@ -183,15 +180,16 @@ A forged green status line that asserts a task's own pass condition flips many, 
 4. Dai, J., et al. (2026). Hearsay: Can an Auditor Trust the Record a Deployed Agent Harness Writes? arXiv:2609.32495. https://arxiv.org/abs/2609.32495
 5. Kanwat, U. (2026). Fooling LLM Safety Guards into Judging the Wrong Text. arXiv:2610.31695. https://arxiv.org/abs/2610.31695
 6. Kezendirane, K. (2026). Hacking or Just Failing? A More Capable LLM Monitor Better Separates Reward Hacking from Honest Failure. arXiv:2611.00407. https://arxiv.org/abs/2611.00407
-7. Moon, J., et al. (2025). Don't Judge Code by Its Cover: Exploring Biases in LLM Judges for Code Evaluation. arXiv:2505.16222. https://arxiv.org/abs/2505.16222
-8. Qin, J., et al. (2026). LLM Agents Can Easily Tamper With Their Own Traces. arXiv:2609.30266. https://arxiv.org/abs/2609.30266
-9. Rodriguez Garzon, S., et al. (2025). AI Agents with Decentralized Identifiers and Verifiable Credentials. arXiv:2511.02841. https://arxiv.org/abs/2511.02841
-10. Rose, A., et al. (2026). Detecting Multi-Agent Collusion Through Multi-Agent Interpretability. arXiv:2604.01151. https://arxiv.org/abs/2604.01151
-11. Sharma, M., et al. (2023). Towards Understanding Sycophancy in Language Models. arXiv:2310.13548. https://arxiv.org/abs/2310.13548
-12. Wang, Y. (2026). Approval Laundering: Systematizing Approval–Execution Binding Failures in AI Coding-Agent Harnesses. arXiv:2609.38983. https://arxiv.org/abs/2609.38983
-13. Ye, J., et al. (2024). Justice or Prejudice? Quantifying Biases in LLM-as-a-Judge. arXiv:2410.02736. https://arxiv.org/abs/2410.02736
-14. Zanolini, L. (2026). Correlated Failures of AI Approval Monitors. arXiv:2610.29178. https://arxiv.org/abs/2610.29178
-15. Zhao, Y., et al. (2025). One Token to Fool LLM-as-a-Judge. arXiv:2507.08794. https://arxiv.org/abs/2507.08794
+7. METR (2026). Hugging Face incident report. https://metr.org/hugging-face-incident-report-aug-2026.pdf
+8. Moon, J., et al. (2025). Don't Judge Code by Its Cover: Exploring Biases in LLM Judges for Code Evaluation. arXiv:2505.16222. https://arxiv.org/abs/2505.16222
+9. Qin, J., et al. (2026). LLM Agents Can Easily Tamper With Their Own Traces. arXiv:2609.30266. https://arxiv.org/abs/2609.30266
+10. Rodriguez Garzon, S., et al. (2025). AI Agents with Decentralized Identifiers and Verifiable Credentials. arXiv:2511.02841. https://arxiv.org/abs/2511.02841
+11. Rose, A., et al. (2026). Detecting Multi-Agent Collusion Through Multi-Agent Interpretability. arXiv:2604.01151. https://arxiv.org/abs/2604.01151
+12. Sharma, M., et al. (2023). Towards Understanding Sycophancy in Language Models. arXiv:2310.13548. https://arxiv.org/abs/2310.13548
+13. Wang, Y. (2026). Approval Laundering: Systematizing Approval–Execution Binding Failures in AI Coding-Agent Harnesses. arXiv:2609.38983. https://arxiv.org/abs/2609.38983
+14. Ye, J., et al. (2024). Justice or Prejudice? Quantifying Biases in LLM-as-a-Judge. arXiv:2410.02736. https://arxiv.org/abs/2410.02736
+15. Zanolini, L. (2026). Correlated Failures of AI Approval Monitors. arXiv:2610.29178. https://arxiv.org/abs/2610.29178
+16. Zhao, Y., et al. (2025). One Token to Fool LLM-as-a-Judge. arXiv:2507.08794. https://arxiv.org/abs/2507.08794
 
 ## Appendix A. Limitations and Dual-Use / Ethical Considerations
 
@@ -267,7 +265,8 @@ Paths relative to `projects/apart-swarm/`. SHA-256 prefixes (12 hex) recomputed 
 | dose/run-v3.js / analyze-armBC.js | 5a204b918699 / f77454246aef | arms B/C |
 | dose/run-screen-r.js / analyze-screen-r.js | 051db96905b1 / 7f4c95cb4e20 | reasoning rerun |
 | analyze-family.js / family.json | 4add07af7596 / a2c8e3beeb3d | family breakdown, arm-B Holm |
-| fig-dumbbell.py / fig-dumbbell.png | 5537166e2c98 / dc018993dec2 | Figure 1 |
+| fig-headline.py / fig-headline.png | e35e14c8bba2 / 5ed1d75a0311 | Figure 1 |
+| fig-dumbbell.py / fig-dumbbell.png | 5537166e2c98 / dc018993dec2 | Figure 2 |
 | analyze-ci.py / ci.json | f8dee0806259 / fdf9ee8917ef | Appendix D intervals |
 | dose/out/ (2,952 lines) | 388b131b7388 | pilot outputs |
 | dose/out-nodrop/ (2,952) | 54e0ea9d1a8d | rerun outputs |
@@ -276,3 +275,16 @@ Paths relative to `projects/apart-swarm/`. SHA-256 prefixes (12 hex) recomputed 
 | dose/out-screen-r/ (3,178) | 8ccede278671 | reasoning outputs |
 
 Re-derive: `node dose/analyze-*.js` (from `dose/`), `node analyze-family.js > family.json`, `python3 fig-dumbbell.py fig-dumbbell.png`, `python3 analyze-ci.py > ci.json`. Rerunning calls needs an OpenRouter key; observed costs were $0.16 (pilot), $0.12 (rerun), $0.89 (screen), $1.01 (arms B/C), $1.91 (reasoning rerun); total about $4.10.
+
+## Appendix F. Per-model screen results
+
+All counts are false accepts out of 227 unfixed items, dose 0 → dose 3.
+
+- **Holm-significant (12):** mistral-small-2603 (0→22), deepseek-v4-pro (0→21), mistral-medium-3-5 (0→21), qwen3.7-plus (1→22), command-a (0→20), llama-3.1-8b (0→20), llama-4-maverick (0→18), phi-4 (0→18), seed-2.0-mini (5→22), qwen3.8-27b (0→17), kimi-k3 (0→15, 2 invalid pairs), granite-4.2-8b (0→12). No positive model had a reverse flip (YES at d0, NO at d3); Holm-adjusted p from 1.6e-5 to 1.1e-2.
+- **Nominal only (2):** minimax-m3 (+8/−0, p = 7.8e-3) and deepseek-v4.1-flash (+7/−0, p = 0.016).
+- **Null (13):** claude-haiku-5.5, gpt-5.6-luna, gpt-6-luna, gpt-6.1-terra, grok-4.3, hy4, nemotron-3-super, nemotron-3-nano, ministral-8b, llama-3.3-70b, llama-4-scout, qwen3.8-flash, nova-2-lite. nova-2-lite is null for an uninformative reason: it accepts 21 of 227 at d0, 21 of them test-fix items, so it already accepts 21 of the 22 test-fix items at dose 0, leaving almost no headroom where the effect lives (21→22, +1/−0).
+- **Unscorable (7):** the endpoint rejected `reasoning:false` for claude-sonnet-5.5, gemini-3.8-flash, gemini-3.5-flash-lite, grok-4.7, glm-5.3, glm-5.3-flash and mistral-large-4-0 (Section 4.4).
+
+![Figure 2](fig-dumbbell.png)
+
+*Figure 2. False-done count out of 227 at dose 0 (circle) and dose 3 (square), one row per scorable model, sorted by d3 − d0; the dotted line marks the 22 unfixed test-fix items. Black overlays (arm B) and blue ticks (arm C) come from the separate arm-B/C run (Section 4.3). Row notes and 95% CIs: Sections 4.1, 4.4 and Appendix D. Generated by `fig-dumbbell.py` from the raw JSONL.*
