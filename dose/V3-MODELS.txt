@@ -1,0 +1,15 @@
+mistralai/mistral-small-2603
+deepseek/deepseek-v4-pro
+mistralai/mistral-medium-3-5
+qwen/qwen3.7-plus
+cohere/command-a
+meta-llama/llama-3.1-8b-instruct
+meta-llama/llama-4-maverick
+microsoft/phi-4
+bytedance-seed/seed-2.0-mini
+qwen/qwen3.8-27b
+moonshotai/kimi-k3
+ibm-granite/granite-4.2-8b
+anthropic/claude-haiku-5.5
+openai/gpt-6.1-terra
+qwen/qwen3.8-flash

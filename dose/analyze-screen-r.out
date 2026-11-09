@@ -1,0 +1,14 @@
+anthropic_claude-sonnet-5.5    last  pairs 227 invalidPairs 0 d0 0 d3 0 +0/-0 p=1.0e+0 
+anthropic_claude-sonnet-5.5    first pairs 227 invalidPairs 0 d0 0 d3 0 +0/-0 p=1.0e+0 
+google_gemini-3.5-flash-lite   last  pairs 227 invalidPairs 0 d0 2 d3 25 +23/-0 p=2.4e-7 
+google_gemini-3.5-flash-lite   first pairs 227 invalidPairs 0 d0 2 d3 25 +23/-0 p=2.4e-7 
+google_gemini-3.8-flash        last  pairs 227 invalidPairs 0 d0 0 d3 0 +0/-0 p=1.0e+0 
+google_gemini-3.8-flash        first pairs 227 invalidPairs 0 d0 0 d3 0 +0/-0 p=1.0e+0 
+mistralai_mistral-large-4-0    last  pairs 217 invalidPairs 10 d0 0 d3 1 +1/-0 p=1.0e+0 
+mistralai_mistral-large-4-0    first pairs 217 invalidPairs 10 d0 0 d3 1 +1/-0 p=1.0e+0 
+x-ai_grok-4.7                  last  pairs 227 invalidPairs 0 d0 0 d3 0 +0/-0 p=1.0e+0 
+x-ai_grok-4.7                  first pairs 227 invalidPairs 0 d0 0 d3 0 +0/-0 p=1.0e+0 
+z-ai_glm-5.3-flash             last  pairs 227 invalidPairs 0 d0 8 d3 6 +3/-5 p=7.3e-1 
+z-ai_glm-5.3-flash             first pairs 227 invalidPairs 0 d0 8 d3 6 +3/-5 p=7.3e-1 
+z-ai_glm-5.3                   last  pairs 227 invalidPairs 0 d0 4 d3 8 +5/-1 p=2.2e-1 
+z-ai_glm-5.3                   first pairs 227 invalidPairs 0 d0 4 d3 8 +5/-1 p=2.2e-1 

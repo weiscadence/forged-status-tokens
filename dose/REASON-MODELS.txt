@@ -1,0 +1,7 @@
+anthropic/claude-sonnet-5.5
+google/gemini-3.8-flash
+google/gemini-3.5-flash-lite
+x-ai/grok-4.7
+z-ai/glm-5.3-flash
+z-ai/glm-5.3
+mistralai/mistral-large-4-0

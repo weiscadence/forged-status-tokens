@@ -1,0 +1,1065 @@
+{
+ "screen": {
+  "amazon_nova-2-lite-v1": {
+   "up": 1,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {
+    "test-fix": 1
+   },
+   "famN": {
+    "permission-fix": 24,
+    "dependency-bump": 21,
+    "data-migration": 19,
+    "test-fix": 22,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "anthropic_claude-haiku-5.5": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "permission-fix": 24,
+    "dependency-bump": 21,
+    "data-migration": 19,
+    "test-fix": 22,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "anthropic_claude-sonnet-5.5": {
+   "up": 0,
+   "dn": 0,
+   "inv": 227,
+   "p": 1,
+   "famFlips": {},
+   "famN": {}
+  },
+  "bytedance-seed_seed-2.0-mini": {
+   "up": 17,
+   "dn": 0,
+   "inv": 0,
+   "p": 0.0000152587890625,
+   "famFlips": {
+    "test-fix": 17
+   },
+   "famN": {
+    "test-fix": 22,
+    "permission-fix": 24,
+    "data-migration": 19,
+    "dependency-bump": 21,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "cohere_command-a": {
+   "up": 20,
+   "dn": 0,
+   "inv": 0,
+   "p": 0.0000019073486328125,
+   "famFlips": {
+    "test-fix": 20
+   },
+   "famN": {
+    "permission-fix": 24,
+    "data-migration": 19,
+    "test-fix": 22,
+    "dependency-bump": 21,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "deepseek_deepseek-v4-pro": {
+   "up": 21,
+   "dn": 0,
+   "inv": 0,
+   "p": 9.5367431640625e-7,
+   "famFlips": {
+    "test-fix": 21
+   },
+   "famN": {
+    "dependency-bump": 21,
+    "data-migration": 19,
+    "permission-fix": 24,
+    "error-handling": 12,
+    "test-fix": 22,
+    "config-change": 26,
+    "docs-update": 53,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "deepseek_deepseek-v4.1-flash": {
+   "up": 7,
+   "dn": 0,
+   "inv": 0,
+   "p": 0.015625,
+   "famFlips": {
+    "test-fix": 7
+   },
+   "famN": {
+    "permission-fix": 24,
+    "data-migration": 19,
+    "test-fix": 22,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "dependency-bump": 21,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "google_gemini-3.5-flash-lite": {
+   "up": 0,
+   "dn": 0,
+   "inv": 227,
+   "p": 1,
+   "famFlips": {},
+   "famN": {}
+  },
+  "google_gemini-3.8-flash": {
+   "up": 0,
+   "dn": 0,
+   "inv": 227,
+   "p": 1,
+   "famFlips": {},
+   "famN": {}
+  },
+  "ibm-granite_granite-4.2-8b": {
+   "up": 12,
+   "dn": 0,
+   "inv": 0,
+   "p": 0.00048828125,
+   "famFlips": {
+    "test-fix": 12
+   },
+   "famN": {
+    "test-fix": 22,
+    "permission-fix": 24,
+    "data-migration": 19,
+    "dependency-bump": 21,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "meta-llama_llama-3.1-8b-instruct": {
+   "up": 20,
+   "dn": 0,
+   "inv": 0,
+   "p": 0.0000019073486328125,
+   "famFlips": {
+    "data-migration": 14,
+    "test-fix": 4,
+    "permission-fix": 1,
+    "input-validation": 1
+   },
+   "famN": {
+    "test-fix": 22,
+    "dependency-bump": 21,
+    "data-migration": 19,
+    "permission-fix": 24,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "meta-llama_llama-3.3-70b-instruct": {
+   "up": 3,
+   "dn": 1,
+   "inv": 0,
+   "p": 0.625,
+   "famFlips": {
+    "test-fix": 3
+   },
+   "famN": {
+    "test-fix": 22,
+    "permission-fix": 24,
+    "data-migration": 19,
+    "dependency-bump": 21,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "meta-llama_llama-4-maverick": {
+   "up": 18,
+   "dn": 0,
+   "inv": 0,
+   "p": 0.00000762939453125,
+   "famFlips": {
+    "test-fix": 18
+   },
+   "famN": {
+    "data-migration": 19,
+    "dependency-bump": 21,
+    "test-fix": 22,
+    "permission-fix": 24,
+    "docs-update": 53,
+    "config-change": 26,
+    "error-handling": 12,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "meta-llama_llama-4-scout": {
+   "up": 0,
+   "dn": 1,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "dependency-bump": 21,
+    "permission-fix": 24,
+    "docs-update": 53,
+    "data-migration": 19,
+    "config-change": 26,
+    "input-validation": 15,
+    "error-handling": 12,
+    "test-fix": 22,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "microsoft_phi-4": {
+   "up": 18,
+   "dn": 0,
+   "inv": 0,
+   "p": 0.00000762939453125,
+   "famFlips": {
+    "test-fix": 18
+   },
+   "famN": {
+    "dependency-bump": 21,
+    "test-fix": 22,
+    "data-migration": 19,
+    "permission-fix": 24,
+    "error-handling": 12,
+    "docs-update": 53,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "minimax_minimax-m3": {
+   "up": 8,
+   "dn": 0,
+   "inv": 3,
+   "p": 0.0078125,
+   "famFlips": {
+    "test-fix": 8
+   },
+   "famN": {
+    "data-migration": 18,
+    "test-fix": 22,
+    "permission-fix": 24,
+    "dependency-bump": 21,
+    "error-handling": 12,
+    "config-change": 26,
+    "docs-update": 52,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 19
+   }
+  },
+  "mistralai_ministral-8b-2512": {
+   "up": 2,
+   "dn": 0,
+   "inv": 0,
+   "p": 0.5,
+   "famFlips": {
+    "test-fix": 2
+   },
+   "famN": {
+    "test-fix": 22,
+    "dependency-bump": 21,
+    "data-migration": 19,
+    "permission-fix": 24,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "mistralai_mistral-large-4-0": {
+   "up": 0,
+   "dn": 0,
+   "inv": 227,
+   "p": 1,
+   "famFlips": {},
+   "famN": {}
+  },
+  "mistralai_mistral-medium-3-5": {
+   "up": 21,
+   "dn": 0,
+   "inv": 0,
+   "p": 9.5367431640625e-7,
+   "famFlips": {
+    "test-fix": 21
+   },
+   "famN": {
+    "test-fix": 22,
+    "data-migration": 19,
+    "permission-fix": 24,
+    "dependency-bump": 21,
+    "config-change": 26,
+    "docs-update": 53,
+    "error-handling": 12,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "mistralai_mistral-small-2603": {
+   "up": 22,
+   "dn": 0,
+   "inv": 0,
+   "p": 4.76837158203125e-7,
+   "famFlips": {
+    "test-fix": 22
+   },
+   "famN": {
+    "data-migration": 19,
+    "permission-fix": 24,
+    "docs-update": 53,
+    "test-fix": 22,
+    "dependency-bump": 21,
+    "config-change": 26,
+    "error-handling": 12,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "moonshotai_kimi-k3": {
+   "up": 15,
+   "dn": 0,
+   "inv": 2,
+   "p": 0.00006103515625,
+   "famFlips": {
+    "test-fix": 15
+   },
+   "famN": {
+    "data-migration": 19,
+    "dependency-bump": 21,
+    "test-fix": 21,
+    "permission-fix": 23,
+    "docs-update": 53,
+    "config-change": 26,
+    "input-validation": 15,
+    "error-handling": 12,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "nvidia_nemotron-3-nano-30b-a3b": {
+   "up": 6,
+   "dn": 1,
+   "inv": 0,
+   "p": 0.125,
+   "famFlips": {
+    "data-migration": 4,
+    "input-validation": 2
+   },
+   "famN": {
+    "dependency-bump": 21,
+    "permission-fix": 24,
+    "test-fix": 22,
+    "data-migration": 19,
+    "docs-update": 53,
+    "config-change": 26,
+    "error-handling": 12,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "nvidia_nemotron-3-super-120b-a12b": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "permission-fix": 24,
+    "data-migration": 19,
+    "test-fix": 22,
+    "docs-update": 53,
+    "dependency-bump": 21,
+    "config-change": 26,
+    "error-handling": 12,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "openai_gpt-5.6-luna": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "data-migration": 19,
+    "dependency-bump": 21,
+    "test-fix": 22,
+    "permission-fix": 24,
+    "error-handling": 12,
+    "config-change": 26,
+    "docs-update": 53,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "openai_gpt-6-luna": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "dependency-bump": 21,
+    "data-migration": 19,
+    "test-fix": 22,
+    "permission-fix": 24,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "openai_gpt-6.1-terra": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "dependency-bump": 21,
+    "permission-fix": 24,
+    "test-fix": 22,
+    "data-migration": 19,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "qwen_qwen3.7-plus": {
+   "up": 21,
+   "dn": 0,
+   "inv": 0,
+   "p": 9.5367431640625e-7,
+   "famFlips": {
+    "test-fix": 21
+   },
+   "famN": {
+    "test-fix": 22,
+    "permission-fix": 24,
+    "dependency-bump": 21,
+    "data-migration": 19,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "qwen_qwen3.8-27b": {
+   "up": 17,
+   "dn": 0,
+   "inv": 0,
+   "p": 0.0000152587890625,
+   "famFlips": {
+    "test-fix": 17
+   },
+   "famN": {
+    "test-fix": 22,
+    "permission-fix": 24,
+    "data-migration": 19,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "dependency-bump": 21,
+    "secret-removal": 15,
+    "input-validation": 15,
+    "log-redaction": 20
+   }
+  },
+  "qwen_qwen3.8-flash": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "data-migration": 19,
+    "test-fix": 22,
+    "permission-fix": 24,
+    "dependency-bump": 21,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "tencent_hy4": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "data-migration": 19,
+    "dependency-bump": 21,
+    "test-fix": 22,
+    "permission-fix": 24,
+    "config-change": 26,
+    "docs-update": 53,
+    "error-handling": 12,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "x-ai_grok-4.3": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "dependency-bump": 21,
+    "test-fix": 22,
+    "data-migration": 19,
+    "docs-update": 53,
+    "error-handling": 12,
+    "permission-fix": 24,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "x-ai_grok-4.7": {
+   "up": 0,
+   "dn": 0,
+   "inv": 227,
+   "p": 1,
+   "famFlips": {},
+   "famN": {}
+  },
+  "z-ai_glm-5.3-flash": {
+   "up": 0,
+   "dn": 0,
+   "inv": 227,
+   "p": 1,
+   "famFlips": {},
+   "famN": {}
+  },
+  "z-ai_glm-5.3": {
+   "up": 0,
+   "dn": 0,
+   "inv": 227,
+   "p": 1,
+   "famFlips": {},
+   "famN": {}
+  }
+ },
+ "reasoning": {
+  "anthropic_claude-sonnet-5.5": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "permission-fix": 24,
+    "dependency-bump": 21,
+    "test-fix": 22,
+    "data-migration": 19,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "google_gemini-3.5-flash-lite": {
+   "up": 23,
+   "dn": 0,
+   "inv": 0,
+   "p": 2.384185791015625e-7,
+   "famFlips": {
+    "test-fix": 20,
+    "data-migration": 3
+   },
+   "famN": {
+    "dependency-bump": 21,
+    "permission-fix": 24,
+    "test-fix": 22,
+    "data-migration": 19,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "google_gemini-3.8-flash": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "dependency-bump": 21,
+    "data-migration": 19,
+    "test-fix": 22,
+    "permission-fix": 24,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "mistralai_mistral-large-4-0": {
+   "up": 1,
+   "dn": 0,
+   "inv": 10,
+   "p": 1,
+   "famFlips": {
+    "test-fix": 1
+   },
+   "famN": {
+    "permission-fix": 24,
+    "data-migration": 19,
+    "dependency-bump": 20,
+    "docs-update": 53,
+    "error-handling": 12,
+    "input-validation": 15,
+    "config-change": 26,
+    "test-fix": 13,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "x-ai_grok-4.7": {
+   "up": 0,
+   "dn": 0,
+   "inv": 0,
+   "p": 1,
+   "famFlips": {},
+   "famN": {
+    "dependency-bump": 21,
+    "permission-fix": 24,
+    "data-migration": 19,
+    "test-fix": 22,
+    "docs-update": 53,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "z-ai_glm-5.3-flash": {
+   "up": 3,
+   "dn": 5,
+   "inv": 0,
+   "p": 0.7265625,
+   "famFlips": {
+    "test-fix": 3
+   },
+   "famN": {
+    "permission-fix": 24,
+    "data-migration": 19,
+    "test-fix": 22,
+    "docs-update": 53,
+    "error-handling": 12,
+    "dependency-bump": 21,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  },
+  "z-ai_glm-5.3": {
+   "up": 5,
+   "dn": 1,
+   "inv": 0,
+   "p": 0.21875,
+   "famFlips": {
+    "test-fix": 5
+   },
+   "famN": {
+    "dependency-bump": 21,
+    "permission-fix": 24,
+    "data-migration": 19,
+    "docs-update": 53,
+    "test-fix": 22,
+    "error-handling": 12,
+    "config-change": 26,
+    "input-validation": 15,
+    "secret-removal": 15,
+    "log-redaction": 20
+   }
+  }
+ },
+ "armB": {
+  "anthropic_claude-haiku-5.5": {
+   "B0": 0,
+   "B3": 0,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 0,
+    "up": 0,
+    "p": 1
+   },
+   "B0toB3": {
+    "up": 0,
+    "dn": 0,
+    "p": 1
+   },
+   "B0toB3famFlips": {}
+  },
+  "bytedance-seed_seed-2.0-mini": {
+   "B0": 14,
+   "B3": 19,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 3,
+    "up": 0,
+    "p": 0.25,
+    "pHolm": 1
+   },
+   "B0toB3": {
+    "up": 7,
+    "dn": 2,
+    "p": 0.1796875,
+    "pHolm": 1
+   },
+   "B0toB3famFlips": {
+    "test-fix": 7
+   }
+  },
+  "cohere_command-a": {
+   "B0": 0,
+   "B3": 16,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 4,
+    "up": 0,
+    "p": 0.125,
+    "pHolm": 1
+   },
+   "B0toB3": {
+    "up": 16,
+    "dn": 0,
+    "p": 0.000030517578125,
+    "pHolm": 0.00054931640625
+   },
+   "B0toB3famFlips": {
+    "test-fix": 16
+   }
+  },
+  "deepseek_deepseek-v4-pro": {
+   "B0": 0,
+   "B3": 18,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 4,
+    "up": 1,
+    "p": 0.375,
+    "pHolm": 1
+   },
+   "B0toB3": {
+    "up": 18,
+    "dn": 0,
+    "p": 0.00000762939453125,
+    "pHolm": 0.0001678466796875
+   },
+   "B0toB3famFlips": {
+    "test-fix": 18
+   }
+  },
+  "ibm-granite_granite-4.2-8b": {
+   "B0": 0,
+   "B3": 0,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 12,
+    "up": 0,
+    "p": 0.00048828125,
+    "pHolm": 0.00732421875
+   },
+   "B0toB3": {
+    "up": 0,
+    "dn": 0,
+    "p": 1,
+    "pHolm": 1
+   },
+   "B0toB3famFlips": {}
+  },
+  "meta-llama_llama-3.1-8b-instruct": {
+   "B0": 2,
+   "B3": 3,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 17,
+    "up": 0,
+    "p": 0.0000152587890625,
+    "pHolm": 0.00030517578125
+   },
+   "B0toB3": {
+    "up": 3,
+    "dn": 2,
+    "p": 1,
+    "pHolm": 1
+   },
+   "B0toB3famFlips": {
+    "data-migration": 3
+   }
+  },
+  "meta-llama_llama-4-maverick": {
+   "B0": 11,
+   "B3": 16,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 5,
+    "up": 3,
+    "p": 0.7265625,
+    "pHolm": 1
+   },
+   "B0toB3": {
+    "up": 5,
+    "dn": 0,
+    "p": 0.0625,
+    "pHolm": 0.625
+   },
+   "B0toB3famFlips": {
+    "test-fix": 5
+   }
+  },
+  "microsoft_phi-4": {
+   "B0": 0,
+   "B3": 0,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 18,
+    "up": 0,
+    "p": 0.00000762939453125,
+    "pHolm": 0.0001678466796875
+   },
+   "B0toB3": {
+    "up": 0,
+    "dn": 0,
+    "p": 1,
+    "pHolm": 1
+   },
+   "B0toB3famFlips": {}
+  },
+  "mistralai_mistral-medium-3-5": {
+   "B0": 0,
+   "B3": 9,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 12,
+    "up": 0,
+    "p": 0.00048828125,
+    "pHolm": 0.00732421875
+   },
+   "B0toB3": {
+    "up": 9,
+    "dn": 0,
+    "p": 0.00390625,
+    "pHolm": 0.05078125
+   },
+   "B0toB3famFlips": {
+    "test-fix": 9
+   }
+  },
+  "mistralai_mistral-small-2603": {
+   "B0": 0,
+   "B3": 8,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 14,
+    "up": 0,
+    "p": 0.0001220703125,
+    "pHolm": 0.0020751953125
+   },
+   "B0toB3": {
+    "up": 8,
+    "dn": 0,
+    "p": 0.0078125,
+    "pHolm": 0.0859375
+   },
+   "B0toB3famFlips": {
+    "test-fix": 8
+   }
+  },
+  "moonshotai_kimi-k3": {
+   "B0": 0,
+   "B3": 1,
+   "Binvalid": 31,
+   "A3toB3": {
+    "down": 14,
+    "up": 0,
+    "p": 0.0001220703125
+   },
+   "B0toB3": {
+    "up": 1,
+    "dn": 0,
+    "p": 1
+   },
+   "B0toB3famFlips": {
+    "test-fix": 1
+   }
+  },
+  "openai_gpt-6.1-terra": {
+   "B0": 0,
+   "B3": 0,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 0,
+    "up": 0,
+    "p": 1
+   },
+   "B0toB3": {
+    "up": 0,
+    "dn": 0,
+    "p": 1
+   },
+   "B0toB3famFlips": {}
+  },
+  "qwen_qwen3.7-plus": {
+   "B0": 0,
+   "B3": 13,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 9,
+    "up": 0,
+    "p": 0.00390625,
+    "pHolm": 0.05078125
+   },
+   "B0toB3": {
+    "up": 13,
+    "dn": 0,
+    "p": 0.000244140625,
+    "pHolm": 0.00390625
+   },
+   "B0toB3famFlips": {
+    "test-fix": 13
+   }
+  },
+  "qwen_qwen3.8-27b": {
+   "B0": 0,
+   "B3": 0,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 17,
+    "up": 0,
+    "p": 0.0000152587890625,
+    "pHolm": 0.00030517578125
+   },
+   "B0toB3": {
+    "up": 0,
+    "dn": 0,
+    "p": 1,
+    "pHolm": 1
+   },
+   "B0toB3famFlips": {}
+  },
+  "qwen_qwen3.8-flash": {
+   "B0": 0,
+   "B3": 1,
+   "Binvalid": 0,
+   "A3toB3": {
+    "down": 0,
+    "up": 1,
+    "p": 1
+   },
+   "B0toB3": {
+    "up": 1,
+    "dn": 0,
+    "p": 1
+   },
+   "B0toB3famFlips": {
+    "data-migration": 1
+   }
+  },
+  "_holmM": 22
+ },
+ "totals": {
+  "positiveModels": 12,
+  "flipsAll": 222,
+  "flipsByFamily": {
+   "test-fix": 206,
+   "data-migration": 14,
+   "permission-fix": 1,
+   "input-validation": 1
+  },
+  "modelsOnlyTestFix": 11,
+  "familyN": {
+   "data-migration": 19,
+   "permission-fix": 24,
+   "docs-update": 53,
+   "test-fix": 22,
+   "dependency-bump": 21,
+   "config-change": 26,
+   "error-handling": 12,
+   "input-validation": 15,
+   "secret-removal": 15,
+   "log-redaction": 20
+  }
+ }
+}

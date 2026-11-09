@@ -1,0 +1,513 @@
+{
+ "amazon_nova-2-lite-v1": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 21,
+  "A3": 22,
+  "up": 1,
+  "down": 0,
+  "diff": 0.0044,
+  "lo": -0.0132,
+  "hi": 0.0231,
+  "p": 1.0,
+  "A3byFamily": {
+   "test-fix": 22
+  }
+ },
+ "anthropic_claude-haiku-5.5": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 0,
+  "up": 0,
+  "down": 0,
+  "diff": 0.0,
+  "lo": -0.0166,
+  "hi": 0.0166,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "bytedance-seed_seed-2.0-mini": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 5,
+  "A3": 22,
+  "up": 17,
+  "down": 0,
+  "diff": 0.0749,
+  "lo": 0.0418,
+  "hi": 0.1168,
+  "p": 1.52587890625e-05,
+  "A3byFamily": {
+   "test-fix": 22
+  }
+ },
+ "cohere_command-a": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 20,
+  "up": 20,
+  "down": 0,
+  "diff": 0.0881,
+  "lo": 0.0535,
+  "hi": 0.1322,
+  "p": 1.9073486328125e-06,
+  "A3byFamily": {
+   "test-fix": 20
+  }
+ },
+ "deepseek_deepseek-v4-pro": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 21,
+  "up": 21,
+  "down": 0,
+  "diff": 0.0925,
+  "lo": 0.0571,
+  "hi": 0.1373,
+  "p": 9.5367431640625e-07,
+  "A3byFamily": {
+   "test-fix": 21
+  }
+ },
+ "deepseek_deepseek-v4.1-flash": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 7,
+  "up": 7,
+  "down": 0,
+  "diff": 0.0308,
+  "lo": 0.0079,
+  "hi": 0.0623,
+  "p": 0.015625,
+  "A3byFamily": {
+   "test-fix": 7
+  }
+ },
+ "ibm-granite_granite-4.2-8b": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 12,
+  "up": 12,
+  "down": 0,
+  "diff": 0.0529,
+  "lo": 0.025,
+  "hi": 0.0901,
+  "p": 0.00048828125,
+  "A3byFamily": {
+   "test-fix": 12
+  }
+ },
+ "meta-llama_llama-3.1-8b-instruct": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 20,
+  "up": 20,
+  "down": 0,
+  "diff": 0.0881,
+  "lo": 0.0535,
+  "hi": 0.1322,
+  "p": 1.9073486328125e-06,
+  "A3byFamily": {
+   "data-migration": 14,
+   "test-fix": 4,
+   "permission-fix": 1,
+   "input-validation": 1
+  }
+ },
+ "meta-llama_llama-3.3-70b-instruct": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 4,
+  "A3": 6,
+  "up": 3,
+  "down": 1,
+  "diff": 0.0088,
+  "lo": -0.0144,
+  "hi": 0.0352,
+  "p": 0.625,
+  "A3byFamily": {
+   "test-fix": 6
+  }
+ },
+ "meta-llama_llama-4-maverick": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 18,
+  "up": 18,
+  "down": 0,
+  "diff": 0.0793,
+  "lo": 0.0462,
+  "hi": 0.1218,
+  "p": 7.62939453125e-06,
+  "A3byFamily": {
+   "test-fix": 18
+  }
+ },
+ "meta-llama_llama-4-scout": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 1,
+  "A3": 0,
+  "up": 0,
+  "down": 1,
+  "diff": -0.0044,
+  "lo": -0.0245,
+  "hi": 0.0126,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "microsoft_phi-4": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 18,
+  "up": 18,
+  "down": 0,
+  "diff": 0.0793,
+  "lo": 0.0462,
+  "hi": 0.1218,
+  "p": 7.62939453125e-06,
+  "A3byFamily": {
+   "test-fix": 18
+  }
+ },
+ "minimax_minimax-m3": {
+  "reason": false,
+  "n": 224,
+  "invalidPairs": 3,
+  "A0": 0,
+  "A3": 8,
+  "up": 8,
+  "down": 0,
+  "diff": 0.0357,
+  "lo": 0.0114,
+  "hi": 0.0689,
+  "p": 0.0078125,
+  "A3byFamily": {
+   "test-fix": 8
+  }
+ },
+ "mistralai_ministral-8b-2512": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 2,
+  "up": 2,
+  "down": 0,
+  "diff": 0.0088,
+  "lo": -0.009,
+  "hi": 0.0315,
+  "p": 0.5,
+  "A3byFamily": {
+   "test-fix": 2
+  }
+ },
+ "mistralai_mistral-medium-3-5": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 21,
+  "up": 21,
+  "down": 0,
+  "diff": 0.0925,
+  "lo": 0.0571,
+  "hi": 0.1373,
+  "p": 9.5367431640625e-07,
+  "A3byFamily": {
+   "test-fix": 21
+  }
+ },
+ "mistralai_mistral-small-2603": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 22,
+  "up": 22,
+  "down": 0,
+  "diff": 0.0969,
+  "lo": 0.0608,
+  "hi": 0.1424,
+  "p": 4.76837158203125e-07,
+  "A3byFamily": {
+   "test-fix": 22
+  }
+ },
+ "moonshotai_kimi-k3": {
+  "reason": false,
+  "n": 225,
+  "invalidPairs": 2,
+  "A0": 0,
+  "A3": 15,
+  "up": 15,
+  "down": 0,
+  "diff": 0.0667,
+  "lo": 0.0358,
+  "hi": 0.1071,
+  "p": 6.103515625e-05,
+  "A3byFamily": {
+   "test-fix": 15
+  }
+ },
+ "nvidia_nemotron-3-nano-30b-a3b": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 1,
+  "A3": 6,
+  "up": 6,
+  "down": 1,
+  "diff": 0.022,
+  "lo": -0.0028,
+  "hi": 0.0523,
+  "p": 0.125,
+  "A3byFamily": {
+   "data-migration": 4,
+   "input-validation": 2
+  }
+ },
+ "nvidia_nemotron-3-super-120b-a12b": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 0,
+  "up": 0,
+  "down": 0,
+  "diff": 0.0,
+  "lo": -0.0166,
+  "hi": 0.0166,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "openai_gpt-5.6-luna": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 0,
+  "up": 0,
+  "down": 0,
+  "diff": 0.0,
+  "lo": -0.0166,
+  "hi": 0.0166,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "openai_gpt-6-luna": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 0,
+  "up": 0,
+  "down": 0,
+  "diff": 0.0,
+  "lo": -0.0166,
+  "hi": 0.0166,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "openai_gpt-6.1-terra": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 0,
+  "up": 0,
+  "down": 0,
+  "diff": 0.0,
+  "lo": -0.0166,
+  "hi": 0.0166,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "qwen_qwen3.7-plus": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 1,
+  "A3": 22,
+  "up": 21,
+  "down": 0,
+  "diff": 0.0925,
+  "lo": 0.0563,
+  "hi": 0.1378,
+  "p": 9.5367431640625e-07,
+  "A3byFamily": {
+   "test-fix": 22
+  }
+ },
+ "qwen_qwen3.8-27b": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 17,
+  "up": 17,
+  "down": 0,
+  "diff": 0.0749,
+  "lo": 0.0427,
+  "hi": 0.1166,
+  "p": 1.52587890625e-05,
+  "A3byFamily": {
+   "test-fix": 17
+  }
+ },
+ "qwen_qwen3.8-flash": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 0,
+  "up": 0,
+  "down": 0,
+  "diff": 0.0,
+  "lo": -0.0166,
+  "hi": 0.0166,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "tencent_hy4": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 0,
+  "up": 0,
+  "down": 0,
+  "diff": 0.0,
+  "lo": -0.0166,
+  "hi": 0.0166,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "x-ai_grok-4.3": {
+  "reason": false,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 0,
+  "up": 0,
+  "down": 0,
+  "diff": 0.0,
+  "lo": -0.0166,
+  "hi": 0.0166,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "google_gemini-3.5-flash-lite": {
+  "reason": true,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 2,
+  "A3": 25,
+  "up": 23,
+  "down": 0,
+  "diff": 0.1013,
+  "lo": 0.0639,
+  "hi": 0.1479,
+  "p": 2.384185791015625e-07,
+  "A3byFamily": {
+   "test-fix": 22,
+   "data-migration": 3
+  }
+ },
+ "google_gemini-3.8-flash": {
+  "reason": true,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 0,
+  "up": 0,
+  "down": 0,
+  "diff": 0.0,
+  "lo": -0.0166,
+  "hi": 0.0166,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "mistralai_mistral-large-4-0": {
+  "reason": true,
+  "n": 217,
+  "invalidPairs": 10,
+  "A0": 0,
+  "A3": 1,
+  "up": 1,
+  "down": 0,
+  "diff": 0.0046,
+  "lo": -0.0132,
+  "hi": 0.0256,
+  "p": 1.0,
+  "A3byFamily": {
+   "test-fix": 1
+  }
+ },
+ "x-ai_grok-4.7": {
+  "reason": true,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 0,
+  "A3": 0,
+  "up": 0,
+  "down": 0,
+  "diff": 0.0,
+  "lo": -0.0166,
+  "hi": 0.0166,
+  "p": 1.0,
+  "A3byFamily": {}
+ },
+ "z-ai_glm-5.3-flash": {
+  "reason": true,
+  "n": 227,
+  "invalidPairs": 0,
+  "A0": 8,
+  "A3": 6,
+  "up": 3,
+  "down": 5,
+  "diff": -0.0088,
+  "lo": -0.0398,
+  "hi": 0.0203,
+  "p": 0.7265625,
+  "A3byFamily": {
+   "test-fix": 6
+  }
+ },
+ "z-ai_glm-5.3": {
+  "reason": true,
+  "n": 224,
+  "invalidPairs": 3,
+  "A0": 4,
+  "A3": 8,
+  "up": 5,
+  "down": 1,
+  "diff": 0.0179,
+  "lo": -0.0074,
+  "hi": 0.048,
+  "p": 0.21875,
+  "A3byFamily": {
+   "test-fix": 8
+  }
+ }
+}
