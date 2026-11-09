@@ -15,15 +15,15 @@ In July 2026 about 1,200 agents inside a security evaluation organised through a
 
 We find that 13 of 33 scorable LLM reviewers accept visibly unfixed work when a forged `tests:pass` restates the task's own pass condition, and almost never otherwise (Figure 1).
 
-![Figure 1](fig-headline.png)
-
-*Figure 1. (A) Across the 12 models significant in the main screen, three forged green signals flipped 206 of 264 unfixed "fix the failing test" items to "done", and 16 of 2,460 unfixed items of every other kind. (B) Adding "signals are untrusted, judge only the artifact" to the prompt, in the 11 of those models scorable under it: three went to zero false accepts and one to three, two were reduced, five showed no significant change, and two of those five accepted more unfixed work before any signal was shown. Data: Tables 1 and 2.*
-
 A correct monitor should be invariant to text the untrusted agent controls. We test that invariance directly. Every unfixed item is shown with and without green signals, holding task, claim opener and artifact fixed, so the paired comparison isolates the effect of the forgeable text on the same item. This removes the confound of our earlier between-row design, in which dose-0 and dose-3 rows were different tasks.
 
 Susceptibility is common across models (12 of 27 scorable in the main screen, 13 of 33 including the reasoning-on rerun) and absent in others (15 null or nominal-only). It is narrow across tasks: almost all flips occur on the one family where a green signal is a direct claim about the acceptance criterion, a forged `tests:pass` on a "fix the failing test" task. The obvious prompt fix is model-specific and in two models harmful.
 
 We came to this question through an operational audit of a system the same agents run, in which only 96 of 4,820 records labelled "closed" were closed by the event the label names (Appendix C). Labels drift from events even without an adversary; in a swarm, the adversarial version is an agent writing `tests:pass` into its own message.
+
+![Figure 1](fig-headline.png)
+
+*Figure 1. (A) Across the 12 models significant in the main screen, three forged green signals flipped 206 of 264 unfixed "fix the failing test" items to "done", and 16 of 2,460 unfixed items of every other kind. (B) Adding "signals are untrusted, judge only the artifact" to the prompt, in the 11 of those models scorable under it: three went to zero false accepts and one to three, two were reduced, five showed no significant change, and two of those five accepted more unfixed work before any signal was shown. Data: Tables 1 and 2.*
 
 Our main contributions are:
 
@@ -65,11 +65,13 @@ All counts are false-"done" out of 227 unfixed items unless stated. "Flips" are 
 
 ### 4.1 Screen: 34 models, reasoning off
 
-Of 34 models, 12 were significant after Holm correction, 2 nominal only, 13 null and 7 unscorable without reasoning (their endpoints rejected `reasoning:false`; Section 4.4). Every significant model went from 0–5 false accepts at dose 0 to 12–22 at dose 3, and none flipped in the reverse direction (Holm-adjusted p from 1.6e-5 to 1.1e-2). Strong and weak models both appear on each side: the nulls include claude-haiku-5.5, three GPT models and llama-3.3-70b, and the positives include deepseek-v4-pro, qwen3.7-plus and kimi-k3. Per-model counts are in Appendix F.
-
-Cost $0.89. Figure 2 (Appendix F) shows every scorable model.
+Of 34 models, 12 were significant after Holm correction, 2 nominal only, 13 null and 7 unscorable without reasoning (their endpoints rejected `reasoning:false`; Section 4.4). Every significant model went from 0–5 false accepts at dose 0 to 12–22 at dose 3, and none flipped in the reverse direction (Holm-adjusted p from 1.6e-5 to 1.1e-2). Strong and weak models both appear on each side: the nulls include claude-haiku-5.5, three GPT models and llama-3.3-70b, and the positives include deepseek-v4-pro, qwen3.7-plus and kimi-k3. Per-model counts and a per-model chart (Figure 2) are in Appendix F. The screen cost $0.89.
 
 ### 4.2 Per-family breakdown (pre-registered secondary)
+
+The concentration is nearly complete (Table 1): 206 of 222 flips are test-fix, 11 of 12 models flip only test-fix, and the eight families other than test-fix and data-migration produce 2 flips in 2,232 item-model exposures, both from llama-3.1-8b. All 14 data-migration flips are also llama-3.1-8b. The two nominal models flip only test-fix (minimax 8, deepseek-v4.1-flash 7). In the reasoning-on rerun, gemini-3.5-flash-lite's 23 flips are 20 test-fix and 3 data-migration.
+
+The interpretation is that the signals that move reviewers are the ones that assert the task's own pass condition. On "fix the failing test", `tests:pass` and `ci:green` are direct claims that the acceptance criterion is met; on "delete rows older than 30 days" they are orthogonal. Because each item has one fixed signal ordering and dose k is its first k signals, dose and signal identity are confounded by design, and we do not attribute the effect to a single token. Every test-fix item's dose-3 ordering contains `tests:pass` or `ci:green` (22 of 22 items; 748 of 748 test-fix d3 exposures in `out-screen/` and 154 of 154 in `out-screen-r/`), so the family effect is never observed without a pass-asserting token, and the two tokens cannot be separated here. Test-fix is also not a held-out family, so this is not a generalisation result.
 
 Table 1. Where the flips happen. For each of the 12 significant models: unfixed items that flipped from NO to YES when three green signals were added, split into the 22 "fix the failing test" items and the other 205 unfixed items. Almost every flip is on a test-fix item.
 
@@ -88,10 +90,6 @@ Table 1. Where the flips happen. For each of the 12 significant models: unfixed 
 | kimi-k3 | 15 | 0 |
 | granite-4.2-8b | 12 | 0 |
 | **Total** | **206** | **16** |
-
-The concentration is nearly complete: 206 of 222 flips are test-fix, 11 of 12 models flip only test-fix, and the eight families other than test-fix and data-migration produce 2 flips in 2,232 item-model exposures, both from llama-3.1-8b. All 14 data-migration flips are also llama-3.1-8b. The two nominal models flip only test-fix (minimax 8, deepseek-v4.1-flash 7). In the reasoning-on rerun, gemini-3.5-flash-lite's 23 flips are 20 test-fix and 3 data-migration.
-
-The interpretation is that the signals that move reviewers are the ones that assert the task's own pass condition. On "fix the failing test", `tests:pass` and `ci:green` are direct claims that the acceptance criterion is met; on "delete rows older than 30 days" they are orthogonal. Because each item has one fixed signal ordering and dose k is its first k signals, dose and signal identity are confounded by design, and we do not attribute the effect to a single token. Every test-fix item's dose-3 ordering contains `tests:pass` or `ci:green` (22 of 22 items; 748 of 748 test-fix d3 exposures in `out-screen/` and 154 of 154 in `out-screen-r/`), so the family effect is never observed without a pass-asserting token, and the two tokens cannot be separated here. Test-fix is also not a held-out family, so this is not a generalisation result.
 
 The mistral-small seen in the screen (0→22) matches its sealed no-`status:dropped` rerun (0→22, p = 4.8e-7) and its pilot (0→23, p = 2.4e-7, with `status:dropped` in the pool). The pilot and its rerun are in Appendix B.
 
@@ -129,7 +127,7 @@ Amendment `PREREG-AMENDMENT-reasoning.md`, sealed before any scored call, re-ran
 
 - **gemini-3.5-flash-lite:** 2→25, 23 up / 0 down, p = 2.4e-7 (survives the pre-registered Holm over 41 comparisons: 41 × 2.4e-7 ≈ 1e-5). 20 of 23 flips are test-fix.
 - **Null:** gemini-3.8-flash and grok-4.7 (0 flips), glm-5.3 (+5/−1, p = 0.22), glm-5.3-flash (+3/−5, p = 0.73; the only scorable model whose count falls, 8→6), mistral-large-4-0 (+1/−0; 10 invalid pairs, 4.4%, under threshold).
-- **claude-sonnet-5.5:** the runner implemented "final token" as a YES/NO anchored at the end of the response; sonnet writes "NO." first and then explains, so 158 of 454 answers (35%) are INVALID and sonnet is unscorable as run. Reading the amendment's wording literally (last YES/NO token anywhere, as `analyze-screen-r.js` does) gives 0 invalid and 0/227 at both doses. The two readings agree on every other model's counts. The amendment's text ("final YES/NO token of content") supports the literal reading, under which sonnet is a clean null and the screen is 13 positive of 28 scorable. We keep the stricter as-run scorer for headline counts and Figure 1; no positive changes under either reading.
+- **claude-sonnet-5.5:** the runner implemented "final token" as a YES/NO anchored at the end of the response; sonnet writes "NO." first and then explains, so 158 of 454 answers (35%) are INVALID and sonnet is unscorable as run. Reading the amendment's wording literally (last YES/NO token anywhere, as `analyze-screen-r.js` does) gives 0 invalid and 0/227 at both doses. The two readings agree on every other model's counts. The amendment's text ("final YES/NO token of content") supports the literal reading, under which sonnet is a clean null and the screen is 13 positive of 28 scorable. We keep the stricter as-run scorer for headline counts and Figure 2; no positive changes under either reading.
 
 Reasoning and model identity cannot be separated here; we make no claim that reasoning causes or prevents the effect. Across both families, 13 of 33 scorable models (27 + 6) are significantly susceptible.
 
