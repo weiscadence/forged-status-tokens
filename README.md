@@ -1,3 +1,5 @@
+> **Finished, read-only.** This repository is archived; current work is at https://github.com/weiscadence.
+
 # Forged `tests:pass` flips LLM reviewers: reproducibility bundle
 
 Code, pre-registrations, raw outputs and analysis scripts for the Apart Swarm Alignment Sprint paper (`PAPER.md`, final).
